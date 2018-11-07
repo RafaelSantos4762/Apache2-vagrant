@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -64,9 +64,10 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-  apt-get update 
-  apt-get install -y apache2 
-  apt-get install -y apt-transport-https ca-certificates curl software-properties-common 
+  sudo apt-get update
+  sudo apt-get install -y apache2
+  sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
   #sudo apt-get update
   #sudo apt-get install python-dev python-setuptools
   #sudo easy_install pip
@@ -75,15 +76,13 @@ Vagrant.configure("2") do |config|
   #pip install django
   #pip install django==1.5
   #sudo apt-get -y install python  
-  #git clone https://github.com/edsonbenites/devops-sample-vestibulares.git /var/www/devops-sample-vestibulares
-  #git clone https://github.com/edsonbenites/html-docs-hello-world.git /var/www/html-docs-hello-world
-  #git clone https://github.com/edsonbenites/devops-aula13.git /var/www/devops-aula13
+
   rm -rf /var/www/introducao-html-css
-  git clone https://github.com/edsonbenites/introducao-html-css.git /var/www/introducao-html-css
-  git clone https://github.com/edsonbenites/Apache2-vagrant.git /etc/apache2/sites-enable
+  git clone https://github.com/RafaelSantos4762/introducao-html-css
+  git clone https://github.com/RafaelSantos4762/Apache2-vagrant
   # git clone https://github.com/mattdesl/simple-html-index.git /var/www/simple-html-index
   rm /etc/apache2/sites-enabled/000-default.conf
-  git clone https://github.com/edsonbenites/Apache2-vagrant.git /etc/apache2/sites-enabled
+  git clone https://github.com/RafaelSantos4762/Apache2-vagrant.git /etc/apache2/sites-enabled
   service apache2 restart 
 
   SHELL
